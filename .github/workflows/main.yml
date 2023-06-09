@@ -87,9 +87,8 @@ jobs:
         if: env.TOOLCHAIN != 'system-gcc' && env.TOOLCHAIN != 'system-clang'
         run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
       - name: Kernel Build
-        run: |
-               cat config.G973F | grep -v 'CONFIG_TARGET' | sudo tee config.G973F
-               ./cruelbuild :build
+        run: ./remove.sh
+          ./cruelbuild :build
 
       - name: Install mkbootimg
         run:
