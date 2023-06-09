@@ -88,7 +88,6 @@ jobs:
         run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
       - name: Kernel Build
         run: |
-               cat config.G973F | grep -v 'CONFIG_TARGET' | tee config.G973F
                echo "------------------------------------------------------------------------"
                echo " "
                echo " "
