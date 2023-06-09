@@ -83,13 +83,6 @@ static unsigned long probe_rsa[PORT_RSA_MAX];
 static unsigned int probe_rsa_count;
 #endif /* CONFIG_SERIAL_8250_RSA  */
 
-struct irq_info {
-	struct			hlist_node node;
-	int			irq;
-	spinlock_t		lock;	/* Protects list not the hash */
-	struct list_head	*head;
-};
-
 #define NR_IRQ_HASH		32	/* Can be adjusted later */
 static struct hlist_head irq_lists[NR_IRQ_HASH];
 static DEFINE_MUTEX(hash_mutex);	/* Used to walk the hash */
