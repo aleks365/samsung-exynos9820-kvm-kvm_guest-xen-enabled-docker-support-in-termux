@@ -67,6 +67,8 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
+                       +kvm \
+                       +kvm_guest \
                        +xen \
                        +docker \
           2>&1 | grep -v 'CONFIG_TARGET' | tee config.info
