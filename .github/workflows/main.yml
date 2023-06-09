@@ -71,8 +71,10 @@ jobs:
                        +kvm_guest \
                        +xen \
                        +docker \
-          2>&1 | grep -v 'CONFIG_TARGET' | tee config.info
-
+          2>&1 | grep -v 'CONFIG_TARGET_CORE' | tee config.info
+          cat config.G973F | grep CONFIG_TARGET_CORE
+          echo "CONFIG_TARGET_CORE=n" >> config.G973F
+          cat config.G973F | grep CONFIG_TARGET_CORE
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
         env:
