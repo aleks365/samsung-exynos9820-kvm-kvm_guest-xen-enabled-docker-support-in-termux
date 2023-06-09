@@ -38,9 +38,12 @@ struct smc_info {
 };
 
 struct irq_info {
-	int irq;
-	void *fn;
-	unsigned long long avg_period;
+        struct                  hlist_node node;
+        int                     irq;
+        spinlock_t              lock;   /* Protects list not the hash */
+        struct list_head        *head;
+        int                     avg_period;
+        int                     fn;
 };
 
 struct hardlockup_info {
