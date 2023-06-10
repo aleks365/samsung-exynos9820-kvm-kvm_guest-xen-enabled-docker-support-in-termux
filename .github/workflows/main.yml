@@ -13,8 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G973F" ]
-
+        model: [ "G970F,G973F,G975F", "N975F" ]
+        
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -72,9 +72,9 @@ jobs:
                        +xen \
                        +docker \
           2>&1 | grep -v 'CONFIG_TARGET_CORE' | tee config.info
-          cat config.G973F | grep CONFIG_TARGET_CORE
           echo "CONFIG_TARGET_CORE=n" >> config.G973F
-          cat config.G973F | grep CONFIG_TARGET_CORE
+          echo "CONFIG_TARGET_CORE=n" >> config.G970F
+          echo "CONFIG_TARGET_CORE=n" >> config.G975F
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
         env:
