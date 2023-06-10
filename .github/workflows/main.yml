@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G970F,G973F,G975F"]
+        model: [ "G970F,G973F,G975F", "G970F", "G973F", "G975F"]
         
     steps:
       - uses: actions/checkout@v3
@@ -71,10 +71,8 @@ jobs:
                        +kvm_guest \
                        +xen \
                        +docker \
-          2>&1 | grep -v 'CONFIG_TARGET_CORE' | tee config.info
-          echo "CONFIG_TARGET_CORE=n" >> config.G973F
-          echo "CONFIG_TARGET_CORE=n" >> config.G970F
-          echo "CONFIG_TARGET_CORE=n" >> config.G975F
+          2>&1 | grep -v 'CONFIG_TARGET_CORE' | tee 
+          
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
         env:
@@ -91,9 +89,6 @@ jobs:
 
       - name: Kernel Build
         run: |
-          echo "CONFIG_TARGET_CORE=n" >> config.G973F
-          echo "CONFIG_TARGET_CORE=n" >> config.G970F
-          echo "CONFIG_TARGET_CORE=n" >> config.G975F
           ./cruelbuild :build
 
       - name: Install mkbootimg
