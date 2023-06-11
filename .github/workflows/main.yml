@@ -89,9 +89,6 @@ jobs:
 
       - name: Kernel Build
         run: |
-          echo CONFIG_MODULES=y > config.G970F
-          echo CONFIG_MODULES=y > config.G973F
-          echo CONFIG_MODULES=y > config.G975F
           ./cruelbuild :build
 
       - name: Install mkbootimg
