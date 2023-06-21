@@ -90,7 +90,16 @@ jobs:
       - name: Kernel Build
         run: |
           ./cruelbuild :build
+          
+      - name: collect Kernel Modules
 
+        run: |
+
+           mkdir modules
+
+           for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
+
+           tar -czvf modules.tar.gz modules
       - name: Install mkbootimg
         run: |
           wget -q https://android.googlesource.com/platform/system/tools/mkbootimg/+archive/refs/heads/master.tar.gz -O - | tar xzf - mkbootimg.py gki
@@ -133,18 +142,13 @@ jobs:
           name: CruelKernel-${{ matrix.model }}
           path: '*.img'
           if-no-files-found: error
-      - name: collect Kernel Modules
-        run: |
-           mkdir modules
-           for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
-           tar -czvf modules.tar.gz modules
-           
+                 
       - name: Upload Kernel Modules
         uses: actions/upload-artifact@v2
         with:
           name: kernel-modules
           path: modules.tar.gz
-        if-no-files-found: error
+          if-no-files-found: error
         
       - name: Upload Kernel Info
         uses: actions/upload-artifact@v2
