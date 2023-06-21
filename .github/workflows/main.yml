@@ -133,7 +133,7 @@ jobs:
           name: CruelKernel-${{ matrix.model }}
           path: '*.img'
           if-no-files-found: error
-     - name: collect Kernel Modules
+      - name: collect Kernel Modules
         run: |
            mkdir modules
            for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
