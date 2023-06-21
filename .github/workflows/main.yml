@@ -67,8 +67,8 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
-                       +kvm_modules \
-                       +kvm_guest_modules \
+                       +kvm \
+                       +kvm_guest \
                        +xen_modules \
                        +docker \
           2>&1 | tee 
