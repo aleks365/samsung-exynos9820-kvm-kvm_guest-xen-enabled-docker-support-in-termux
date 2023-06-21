@@ -69,7 +69,7 @@ jobs:
                        +boeffla_wl_blocker       \
                        +kvm \
                        +kvm_guest \
-                       +xen_modules \
+                       +xen \
                        +docker \
           2>&1 | tee 
           
