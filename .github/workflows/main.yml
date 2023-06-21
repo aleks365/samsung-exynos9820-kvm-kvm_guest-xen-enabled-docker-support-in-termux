@@ -71,7 +71,7 @@ jobs:
                        +kvm_guest \
                        +xen \
                        +docker \
-          2>&1 | grep -v 'CONFIG_TARGET_CORE' | tee 
+          2>&1 | tee 
           
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
