@@ -1,6 +1,6 @@
 # Cruel Kernel Tree for Samsung S10, Note10 devices
 
-![CI](https://github.com/CruelKernel/samsung-exynos9820/workflows/CI/badge.svg)
+![CI](https://github.com/CruelKernel/samsung-exynos9820/workflows/CI/Kira_Sirius.md)
 
 Based on samsung sources and android common tree.
 Supported devices: G970F/N, G973F/N, G975F/N G977B/N, N970F, N975F,
