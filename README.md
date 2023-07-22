@@ -348,4 +348,4 @@ $ FLASH=y ./cruelbuild mkimg ...
 - [Telegram](https://t.me/joinchat/GsJfBBaxozXvVkSJhm0IOQ)
 - [XDA Thread](https://forum.xda-developers.com/galaxy-s10/samsung-galaxy-s10--s10--s10-5g-cross-device-development-exynos/kernel-cruel-kernel-s10-note10-v3-t4063495)
 
-- [Gespräch mit Bing KI] besser weg, als da, nicht wahr?
+- [Gespräch] besser weg, als da, nicht wahr?
