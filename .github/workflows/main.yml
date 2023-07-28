@@ -97,6 +97,12 @@ jobs:
            mkdir modules
            for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
            tar -czvf modules.tar.gz modules
+     
+      - name: searching for initrd-files
+        run: |
+           mkdir initrd
+           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp $i initrd; done
+           tar -czvf initrd.tar.gz initrd
            
       - name: Install mkbootimg  
         run: |
@@ -152,7 +158,14 @@ jobs:
           name: kernel-modules
           path: modules.tar.gz
           if-no-files-found: error
-        
+          
+      - name: Upload initrd-files
+        uses: actions/upload-artifact@v2
+        with:
+          name: initrd-files
+          path: initrd.tar.gz
+          if-no-files-found: error
+          
       - name: Upload Kernel Info
         uses: actions/upload-artifact@v2
         with:
