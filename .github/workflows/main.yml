@@ -72,17 +72,17 @@ jobs:
                        +docker \
           2>&1 | tee 
           
-      #- name: Install gcc-aarch64-linux-gnu
-      #  if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
-      #  env:
-      #    DEBIAN_FRONTEND: noninteractive
-      #  run: sudo apt-get install -y -qq gcc-aarch64-linux-gnu
+      - name: Install gcc-aarch64-linux-gnu
+        if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: sudo apt-get install -y -qq gcc-aarch64-linux-gnu
         
-      #- name: Install clang
-      #  if: env.TOOLCHAIN == 'system-clang'
-      #  env:
-      #    DEBIAN_FRONTEND: noninteractive
-      #  run: sudo apt-get install -y -qq llvm lld clang
+      - name: Install clang
+        if: env.TOOLCHAIN == 'system-clang'
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: sudo apt-get install -y -qq llvm lld clang
         
       #- name: Deploy Toolchain
       #  if: env.TOOLCHAIN != 'system-gcc' && env.TOOLCHAIN != 'system-clang'
@@ -90,7 +90,7 @@ jobs:
 
       - name: Kernel Build
         run: |
-          ./cruelbuild :build toolchain=system-gcc
+          ./cruelbuild :build toolchain=$TOOLCHAIN
           
       - name: collect and pack kernel modules
         run: |
