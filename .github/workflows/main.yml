@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 env:
-  TOOLCHAIN: system-clang
+  TOOLCHAIN: system-gcc
   INSTALLER: yes
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-devel-kvm-kvm_guest-xen-docker"        \
                        toolchain=$TOOLCHAIN      \
                        +magisk                   \
                        +nohardening              \
@@ -90,7 +90,7 @@ jobs:
 
       - name: Kernel Build
         run: |
-          ./cruelbuild :build toolchain=system-clang
+          ./cruelbuild :build toolchain=system-gcc
           
       - name: collect and pack kernel modules
         run: |
