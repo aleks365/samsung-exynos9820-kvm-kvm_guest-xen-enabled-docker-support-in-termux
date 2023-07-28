@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 env:
-  TOOLCHAIN: system-gcc
+  TOOLCHAIN: cruel
   INSTALLER: yes
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel-kvm-kvm_guest-xen-docker"        \
+                       name="Cruel-devel"        \
                        toolchain=$TOOLCHAIN      \
                        +magisk                   \
                        +nohardening              \
@@ -67,7 +67,7 @@ jobs:
                        +morosound                \
                        +boeffla_wl_blocker       \
                        +kvm_modules \
-                       +kvm_guest_modules \
+                       +kvm_guest \
                        +xen \
                        +docker \
           2>&1 | tee 
@@ -84,25 +84,19 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: sudo apt-get install -y -qq llvm lld clang
         
-      #- name: Deploy Toolchain
-      #  if: env.TOOLCHAIN != 'system-gcc' && env.TOOLCHAIN != 'system-clang'
-      #  run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
+      - name: Deploy Toolchain
+        if: env.TOOLCHAIN != 'system-gcc' && env.TOOLCHAIN != 'system-clang'
+        run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
 
       - name: Kernel Build
         run: |
-          ./cruelbuild :build toolchain=$TOOLCHAIN
+          ./cruelbuild :build
           
       - name: collect and pack kernel modules
         run: |
            mkdir modules
            for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
            tar -czvf modules.tar.gz modules
-     
-      - name: collect and pack initrd-files
-        run: |
-           mkdir initrd
-           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp $i initrd; done
-           tar -czvf initrd.tar.gz initrd
            
       - name: Install mkbootimg  
         run: |
@@ -158,14 +152,7 @@ jobs:
           name: kernel-modules
           path: modules.tar.gz
           if-no-files-found: error
-          
-      - name: Upload initrd-files
-        uses: actions/upload-artifact@v2
-        with:
-          name: initrd-files
-          path: initrd.tar.gz
-          if-no-files-found: error
-          
+        
       - name: Upload Kernel Info
         uses: actions/upload-artifact@v2
         with:
