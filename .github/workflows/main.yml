@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 env:
-  TOOLCHAIN: cruel
+  TOOLCHAIN: system-gcc
   INSTALLER: yes
 
 jobs:
@@ -67,6 +67,7 @@ jobs:
                        +morosound                \
                        +boeffla_wl_blocker       \
                        +kvm_modules \
+                       +kvm \
                        +kvm_guest \
                        +xen \
                        +docker \
@@ -90,7 +91,7 @@ jobs:
 
       - name: Kernel Build
         run: |
-          ./cruelbuild :build
+          ./cruelbuild :build toolchain=$TOOLCHAIN
           
       - name: collect and pack kernel modules
         run: |
