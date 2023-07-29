@@ -54,7 +54,7 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-kvm-kvm_guest-xen-docker"        \
                        toolchain=$TOOLCHAIN      \
                        +magisk                   \
                        +nohardening              \
@@ -120,7 +120,13 @@ jobs:
 
       - name: Create CruelKernel images for ${{ matrix.model }}
         run: ./cruelbuild :mkimg
-        
+      
+      - name: collect and pack initrd-files
+        run: |
+           mkdir initrd
+           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp $i initrd; done
+           tar -czvf initrd.tar.gz initrd
+           
       - name: Create CruelKernel installer for ${{ matrix.model }}
         if: env.INSTALLER == 'yes'
         run: ./cruelbuild :pack
@@ -153,7 +159,14 @@ jobs:
           name: kernel-modules
           path: modules.tar.gz
           if-no-files-found: error
-        
+          
+      - name: Upload initrd-files
+        uses: actions/upload-artifact@v2
+        with:
+          name: initrd-files
+          path: initrd.tar.gz
+          if-no-files-found: error
+          
       - name: Upload Kernel Info
         uses: actions/upload-artifact@v2
         with:
