@@ -95,8 +95,8 @@ jobs:
           
       - name: collect and pack kernel modules
         run: |
-           mkdir modules
-           for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp $i modules; done
+           mkdir -p modules
+           for i in `find . -name '*.ko'`; do echo "copy $i --> modules"; cp -r $i modules; done
            tar -czvf modules.tar.gz modules
            
       - name: Install mkbootimg  
@@ -123,8 +123,8 @@ jobs:
       
       - name: collect and pack initrd-files
         run: |
-           mkdir initrd
-           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp $i initrd; done
+           mkdir -p initrd
+           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp -r $i initrd; done
            tar -czvf initrd.tar.gz initrd
            
       - name: Create CruelKernel installer for ${{ matrix.model }}
