@@ -123,9 +123,9 @@ jobs:
       
       - name: collect and pack initrd-files
         run: |
-           mkdir -p initrd
-           for i in `find . -name '*init*rd'`; do echo "copy $i --> initrd"; cp -r $i initrd; done
-           tar -czvf initrd.tar.gz initrd
+           mkdir -p initrd-files
+           for i in `find . -name '*init*rd' | grep -v initrd-files`; do echo "copy $i --> initrd-files"; cp -r $i initrd-files; done
+           tar -czvf initrd-files.tar.gz initrd-files
            
       - name: Create CruelKernel installer for ${{ matrix.model }}
         if: env.INSTALLER == 'yes'
@@ -164,7 +164,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: initrd-files
-          path: initrd.tar.gz
+          path: initrd-files.tar.gz
           if-no-files-found: error
           
       - name: Upload Kernel Info
