@@ -70,6 +70,7 @@ jobs:
                        +kvm \
                        +kvm_guest \
                        +xen \
+                       +xen_modules \
                        +docker \
           2>&1 | tee 
           
