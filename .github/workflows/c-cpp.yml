@@ -27,7 +27,7 @@ jobs:
 
    - name: git clone
      run: git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
-
+ 
    - name: repo sync
      run: repo sync --force-sync --no-tags --no-clone-bundle -c
    - name: build
