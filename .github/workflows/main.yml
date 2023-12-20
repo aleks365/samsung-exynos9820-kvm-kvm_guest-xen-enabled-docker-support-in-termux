@@ -19,17 +19,14 @@ jobs:
          sudo apt install -y repo git mka lunch tar
 
    - name: mkdir and cd
-     run: mkdir lineage-19.1 && cd lineage-19.1
-   - name: repo init
-     run: repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --git-lfs
-
-   - name: git clone
-     run: git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
-
-   - name: repo sync
-     run: repo sync --force-sync --no-tags --no-clone-bundle -c
+     run: |
+       mkdir lineage-19.1 && cd lineage-19.1
+       repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --git-lfs
+       git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
+       repo sync --force-sync --no-tags --no-clone-bundle -c
    - name: build
      run: |
+       cd lineage-19.1 
        . build/envsetup.sh 
        lunch lineage_s5neolte-userdebug 
        mka otapackage
