@@ -23,7 +23,7 @@ jobs:
         run: |
           mkdir lineage-19.1
           cd lineage-19.1
-          repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --git-lfs
+          repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
           git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
           repo sync --force-sync --no-tags --no-clone-bundle -c
           . build/envsetup.sh 
