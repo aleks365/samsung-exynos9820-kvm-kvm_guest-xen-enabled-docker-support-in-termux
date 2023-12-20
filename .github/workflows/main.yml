@@ -21,28 +21,28 @@ jobs:
           df -h
           echo "<--------"
           sudo apt update 
-          sudo apt install -y repo git mkalias python3 python3-pip tar
+          sudo apt install -y repo git mkalias python3-pip tar
           pip3 install lunch
 
       - name: Setup and build
         run: |
           mkdir lineage-19.1
           cd lineage-19.1
-          repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
-          git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
+          sudo repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --depth=1
+          git clone --depth=1 https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
           repo sync --force-sync --no-tags --no-clone-bundle -c
           . build/envsetup.sh 
           lunch lineage_s5neolte-userdebug 
           mka otapackage
           
-      - name: Create tar archive
-        run: |
-          mkdir -p geili
-          tar -cf geili/file.tar lineage-19.1
+#      - name: Create tar archive
+#        run: |
+#          mkdir -p geili
+#          tar -cf geili/file.tar lineage-19.1
 
-      - name: Upload geili Zip
+      - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: tolli geili
-          path: geili/*
+          name: repo
+          path: lineage-19.1/*
           if-no-files-found: error
