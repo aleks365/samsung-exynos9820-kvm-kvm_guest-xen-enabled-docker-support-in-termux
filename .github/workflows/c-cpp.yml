@@ -12,9 +12,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        model: [ "G970F,G973F,G975F", "G970F", "G973F", "G975F"]
-        
+      
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
