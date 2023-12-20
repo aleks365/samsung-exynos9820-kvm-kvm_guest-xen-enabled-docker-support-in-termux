@@ -35,13 +35,12 @@ jobs:
        . build/envsetup.sh \
        lunch lineage_s5neolte-userdebug \
        mka otapackage
+
    - name: tar
      run: |
-       cd .. \
-       mkdir -p geili \
-       tar -cf geili/file.tar lineage-19.1
+       mkdir -p geili && tar -cf geili/file.tar lineage-19.1
 
-    - name: upload geili Zip
+   - name: upload geili Zip
       uses: actions/upload-artifact@v2
       with:
         name: tolli geili
