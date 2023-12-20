@@ -15,7 +15,7 @@ jobs:
 
      - name: Install dependencies
        run: |
-         sudo apt update \
+         sudo apt update 
          sudo apt install -y repo git mka lunch tar
 
    - name: mkdir and cd
@@ -30,8 +30,8 @@ jobs:
      run: repo sync --force-sync --no-tags --no-clone-bundle -c
    - name: build
      run: |
-       . build/envsetup.sh \
-       lunch lineage_s5neolte-userdebug \
+       . build/envsetup.sh 
+       lunch lineage_s5neolte-userdebug 
        mka otapackage
 
    - name: tar
