@@ -1,0 +1,34 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "cruel-HVJ5-v5.3" ]
+  pull_request:
+    branches: [ "cruel-HVJ5-v5.3" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: apt
+      run: |
+        sudo apt update \
+        sudo apt install -y repo git mka lunch tar
+    - name: mkdir and cd
+      run: mkdir lineage-19.1 && cd lineage-19.1
+    - name: repo init
+      run: repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --git-lfs
+    - name: git clone
+      run: git clone https://github.com/K9100ii/s5neolte-manifest.git -b lineage-19.1 .repo/local_manifests
+    - name: repo sync
+      run: repo sync --force-sync --no-tags --no-clone-bundle -c
+    - name: build
+      run: |
+        . build/envsetup.sh \
+        lunch lineage_s5neolte-userdebug \
+        mka otapackage
+    - name: tar
+      run: tar -cf ../file.tar .
