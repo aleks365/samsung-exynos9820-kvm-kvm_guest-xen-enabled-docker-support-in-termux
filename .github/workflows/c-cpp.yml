@@ -2,10 +2,6 @@ name: Build
 
 on: [push]
 
-env:
-  TOOLCHAIN: system-gcc
-  INSTALLER: yes
-
 jobs:
   build:
     runs-on: ubuntu-22.04
