@@ -16,8 +16,6 @@ jobs:
          python-version: '3.7'
 
      - name: Install dependencies
-       env:
-         DEBIAN_FRONTEND: noninteractive
        run: |
          sudo apt update \
          sudo apt install -y repo git mka lunch tar
