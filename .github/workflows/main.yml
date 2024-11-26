@@ -142,7 +142,7 @@ jobs:
           
       - name: Upload Kernel Zip
         if: env.INSTALLER == 'yes'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: CruelKernel-${{ matrix.model }}
           path: installer/*
@@ -150,14 +150,14 @@ jobs:
           
       - name: Upload Kernel Images
         if: env.INSTALLER != 'yes'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: CruelKernel-${{ matrix.model }}
           path: '*.img'
           if-no-files-found: error
                  
       - name: Upload Kernel Modules
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kernel-modules
           path: modules.tar.gz
