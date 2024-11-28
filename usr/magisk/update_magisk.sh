@@ -9,18 +9,18 @@ ver="$(cat "$DIR/magisk_version" 2>/dev/null || echo -n 'none')"
 if [ "x$1" = "xcanary" ]
 then
 	nver="canary"
-	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v26.4/Magisk-v26.4.apk"
+	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v27.0/Magisk-v27.0.apk"
 elif [ "x$1" = "xalpha" ]
 then
 	nver="alpha"
-	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v26.4/Magisk-v26.4.apk"
+	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v27.0/Magisk-v27.0.apk"
 else
 	if [ "x$1" = "x" ]; then
 		nver="$(curl -s https://github.com/topjohnwu/Magisk/releases | grep -m 1 -Poe 'Magisk v[\d\.]+' | cut -d ' ' -f 2)"
 	else
 		nver="$1"
 	fi
-	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v26.4/Magisk-v26.4.apk"
+	magisk_link="https://github.com/topjohnwu/Magisk/releases/download/v27.0/Magisk-v27.0.apk"
 fi
 
 if [ \( -n "$nver" \) -a \( "$nver" != "$ver" \) -o ! \( -f "$DIR/magiskinit" \) -o \( "$nver" = "canary" \) -o \( "$nver" = "alpha" \) ]
